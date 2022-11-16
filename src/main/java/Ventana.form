@@ -77,36 +77,36 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="795d" class="javax.swing.JButton" binding="button1" default-binding="true">
+          <component id="795d" class="javax.swing.JButton" binding="btmNuevo">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value="Nuevo"/>
             </properties>
           </component>
-          <component id="56eb4" class="javax.swing.JButton" binding="button2" default-binding="true">
+          <component id="56eb4" class="javax.swing.JButton" binding="btmGuardar">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value="Guardar"/>
             </properties>
           </component>
-          <component id="2373a" class="javax.swing.JButton" binding="button3" default-binding="true">
+          <component id="2373a" class="javax.swing.JButton" binding="btmEliminar">
             <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value="Eliminar"/>
             </properties>
           </component>
-          <component id="886aa" class="javax.swing.JButton" binding="button4" default-binding="true">
+          <component id="886aa" class="javax.swing.JButton" binding="btmActualizar">
             <constraints>
               <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value="Actualizar"/>
             </properties>
           </component>
         </children>
