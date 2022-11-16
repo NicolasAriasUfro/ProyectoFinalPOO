@@ -1,6 +1,11 @@
+import com.mysql.jdbc.Connection;
+import conexionSQL.conexionSQL;
+
 import javax.swing.*;
 
 public class Ventana extends JFrame{
+    conexionSQL cc = new conexionSQL();
+    Connection con = cc.conexion();
     Ventana(){
         frameInit();
         this.setContentPane(ventanaConexion);

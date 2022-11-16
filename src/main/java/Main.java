@@ -5,7 +5,7 @@ public class Main {
             public void run() {
                 new Ventana().setVisible(true);
             }
-        });+
+        });
 
 //Sabiomen estuvo aqui
         //nico estuvo aquí
