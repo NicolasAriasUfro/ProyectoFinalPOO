@@ -14,4 +14,5 @@ public class Ventana extends JFrame{
     private JButton btmGuardar;
     private JButton btmEliminar;
     private JButton btmActualizar;
+    private JTextField textField4;
 }
