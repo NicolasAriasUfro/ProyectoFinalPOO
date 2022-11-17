@@ -6,7 +6,6 @@ public class Main {
                 new Ventana().setVisible(true);
             }
         });
-
 //Sabiomen estuvo aqui
         //nico estuvo aquí
         // boot 2.0
