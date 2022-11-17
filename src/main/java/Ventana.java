@@ -5,6 +5,7 @@ import conexionSQL.conexionSQL;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -56,6 +57,28 @@ public class Ventana extends JFrame{
                 mostrarDatos();
             }
         });
+        btmEliminar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                eliminarDatos();
+                limpiarCajas();
+                mostrarDatos();
+            }
+        });
+    }
+
+    private void eliminarDatos() {
+        int filaSeleccionada = tablaSemillas.getSelectedRow();
+        try{
+            String SQL = "delete from semillas where id=" + tablaSemillas.getValueAt(filaSeleccionada,0);
+
+            Statement st = (Statement) con.createStatement();
+            int n = st.executeUpdate(SQL);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Error al eliminar registros: "+ e.getMessage());
+        }
+
+
     }
 
     private void actualizarDatos() {

@@ -1,8 +1,6 @@
 package conexionSQL;
 
-
 import com.mysql.jdbc.Connection;
-
 import javax.swing.*;
 import java.sql.DriverManager;
 
