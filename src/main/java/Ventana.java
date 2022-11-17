@@ -86,6 +86,7 @@ public class Ventana extends JFrame{
     }
 
     private void actualizarDatos() {
+        //Arreglar el Bug de duplicado en Actualizar
         try{
             String SQL = "update semillas set nombre_semilla =?,ancho=?,largo=?,crecimiento=? where ID = ?";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(SQL);
