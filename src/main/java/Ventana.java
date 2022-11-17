@@ -1,10 +1,15 @@
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.Statement;
 import conexionSQL.conexionSQL;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Ventana extends JFrame{
@@ -16,15 +21,68 @@ public class Ventana extends JFrame{
         this.setContentPane(ventanaConexion);
         this.setSize(700,500);
 
+        mostrarDatos();
+
 
         btmGuardar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 subirDatosaLaBD();
                 limpiarCajas();
+                mostrarDatos();
 
             }
         });
+        tablaSemillas.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                int filaSeleccionada = tablaSemillas.rowAtPoint(e.getPoint());
+
+                txtNombre.setText((String) tablaSemillas.getValueAt(filaSeleccionada,1));
+                txtAncho.setText((String) tablaSemillas.getValueAt(filaSeleccionada,2));
+                txtLargo.setText((String) tablaSemillas.getValueAt(filaSeleccionada,3));
+                txtCrecimiento.setText((String) tablaSemillas.getValueAt(filaSeleccionada,4));
+
+
+
+            }
+        });
+        btmActualizar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actualizarDatos();
+                limpiarCajas();
+                mostrarDatos();
+            }
+        });
+    }
+
+    private void actualizarDatos() {
+        try{
+            String SQL = "update semillas set nombre_semilla =?,ancho=?,largo=?,crecimiento=? where ID = ?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(SQL);
+
+            int filaSeleccionada = tablaSemillas.getSelectedColumn();
+            String dao = (String) tablaSemillas.getValueAt(filaSeleccionada,0);
+
+
+
+            pst.setString(1,txtNombre.getText());
+            pst.setString(2,txtAncho.getText());
+            pst.setString(3,txtLargo.getText());
+            pst.setString(4,txtCrecimiento.getText());
+
+            //pasar el id
+            pst.setString(5,dao);
+
+            pst.execute();
+
+            JOptionPane.showMessageDialog(null,"Registro Actualizado");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Error de Actualizacion: "+ e.getMessage());
+        }
     }
 
     private void limpiarCajas() {
@@ -51,6 +109,32 @@ public class Ventana extends JFrame{
             JOptionPane.showMessageDialog(null,"Error de registros: "+ e.getMessage());
         }
     }
+    public void mostrarDatos(){
+        String[] titulos = {"ID","Nombre","Ancho","Largo","Crecimiento"};
+        String[] registros = new String[5];
+
+        DefaultTableModel modelo = new DefaultTableModel(null,titulos);
+        String SQL = "select * from semillas";
+        try {
+            Statement st= (Statement) con.createStatement();
+            ResultSet rs = st.executeQuery(SQL);
+
+            while (rs.next()){
+                registros[0]= rs.getString("ID");
+                registros[1]= rs.getString("nombre_semilla");
+                registros[2]= rs.getString("ancho");
+                registros[3]= rs.getString("largo");
+                registros[4]= rs.getString("crecimiento");
+
+                modelo.addRow(registros);
+                tablaSemillas.setModel(modelo);
+
+
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Error al cargar los datos: " + e.getMessage());
+        }
+    }
 
     private JPanel ventanaConexion;
     private JTextField txtNombre;
@@ -61,4 +145,6 @@ public class Ventana extends JFrame{
     private JButton btmEliminar;
     private JButton btmActualizar;
     private JTextField txtCrecimiento;
+    private JTable tablaSemillas;
+    private JTextField txtBusqueda;
 }
