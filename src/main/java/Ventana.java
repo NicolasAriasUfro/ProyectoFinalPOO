@@ -90,7 +90,7 @@ public class Ventana extends JFrame{
             String SQL = "update semillas set nombre_semilla =?,ancho=?,largo=?,crecimiento=? where ID = ?";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(SQL);
 
-            int filaSeleccionada = tablaSemillas.getSelectedColumn();
+            int filaSeleccionada = tablaSemillas.getSelectedRow();
             String dao = (String) tablaSemillas.getValueAt(filaSeleccionada,0);
 
 
