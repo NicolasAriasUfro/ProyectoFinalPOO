@@ -6,10 +6,7 @@ import conexionSQL.conexionSQL;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -63,6 +60,13 @@ public class Ventana extends JFrame{
                 eliminarDatos();
                 limpiarCajas();
                 mostrarDatos();
+            }
+        });
+        txtBusqueda.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                super.keyReleased(e);
+                filtrarDatos(txtBusqueda.getText());
             }
         });
     }
@@ -138,6 +142,32 @@ public class Ventana extends JFrame{
 
         DefaultTableModel modelo = new DefaultTableModel(null,titulos);
         String SQL = "select * from semillas";
+        try {
+            Statement st= (Statement) con.createStatement();
+            ResultSet rs = st.executeQuery(SQL);
+
+            while (rs.next()){
+                registros[0]= rs.getString("ID");
+                registros[1]= rs.getString("nombre_semilla");
+                registros[2]= rs.getString("ancho");
+                registros[3]= rs.getString("largo");
+                registros[4]= rs.getString("crecimiento");
+
+                modelo.addRow(registros);
+                tablaSemillas.setModel(modelo);
+
+
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Error al cargar los datos: " + e.getMessage());
+        }
+    }
+    public void filtrarDatos(String valor){
+        String[] titulos = {"ID","Nombre","Ancho","Largo","Crecimiento"};
+        String[] registros = new String[5];
+
+        DefaultTableModel modelo = new DefaultTableModel(null,titulos);
+        String SQL = "select * from semillas where nombre_semilla like '%" + valor+ "%'";
         try {
             Statement st= (Statement) con.createStatement();
             ResultSet rs = st.executeQuery(SQL);
