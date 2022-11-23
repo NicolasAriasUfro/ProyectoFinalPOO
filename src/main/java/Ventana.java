@@ -5,7 +5,6 @@ import conexionSQL.conexionSQL;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -67,6 +66,12 @@ public class Ventana extends JFrame{
             public void keyReleased(KeyEvent e) {
                 super.keyReleased(e);
                 filtrarDatos(txtBusqueda.getText());
+            }
+        });
+        btmAbrirInvernadero.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Ventana_2().setVisible(true);
             }
         });
     }
@@ -201,4 +206,5 @@ public class Ventana extends JFrame{
     private JTextField txtCrecimiento;
     private JTable tablaSemillas;
     private JTextField txtBusqueda;
+    private JButton btmAbrirInvernadero;
 }
