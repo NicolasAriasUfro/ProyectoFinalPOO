@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class Ventana extends JFrame{
     conexionSQL cc = new conexionSQL();
     Connection con = cc.conexion();
-    Ventana(){
+    public Ventana(){
         frameInit();
         this.setTitle("Proyecto Invernadero");
         this.setContentPane(ventanaConexion);
