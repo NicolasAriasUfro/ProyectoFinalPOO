@@ -71,7 +71,7 @@ public class Ventana extends JFrame{
         btmAbrirInvernadero.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Ventana_2().setVisible(true);
+                new Invernadero().setVisible(true);
             }
         });
     }

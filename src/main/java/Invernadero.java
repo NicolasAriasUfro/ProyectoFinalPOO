@@ -1,8 +1,8 @@
 import javax.swing.*;
 
-public class Ventana_2 extends JFrame{
+public class Invernadero extends JFrame{
 
-    Ventana_2(){
+    Invernadero(){
         frameInit();
         this.setContentPane(Plantacion);
         this.setSize(500,500);
