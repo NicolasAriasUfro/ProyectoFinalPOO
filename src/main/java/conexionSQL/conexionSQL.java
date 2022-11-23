@@ -10,7 +10,7 @@ public class conexionSQL {
 
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            conectar = (Connection) DriverManager.getConnection("jdbc:mysql://sql10.freesqldatabase.com/sql10576075", "sql10576075", "WmZf7f8z2Q");
+            conectar = (Connection) DriverManager.getConnection("jdbc:mysql://bruselas.ceisufro.cl/bd_invernadero", "accesoinvernadero", "#123invernadero");
 
             JOptionPane.showMessageDialog(null, "Conexion Exitosa");
         }catch (Exception e){
