@@ -1,3 +1,6 @@
+package Vista;
+
+import Vista.Invernadero;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
