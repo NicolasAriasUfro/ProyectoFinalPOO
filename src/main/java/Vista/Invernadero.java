@@ -1,3 +1,5 @@
+package Vista;
+
 import javax.swing.*;
 
 public class Invernadero extends JFrame{
