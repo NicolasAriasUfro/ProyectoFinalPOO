@@ -1,20 +1,17 @@
 package Vista;
 
 import Vista.Invernadero;
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.Statement;
+
 import conexionSQL.conexionSQL;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Ventana extends JFrame{
     conexionSQL cc = new conexionSQL();
-    Connection con = cc.conexion();
+    Connection con = (Connection) cc.conexion();
     public Ventana(){
         frameInit();
         this.setTitle("Proyecto Invernadero");
@@ -96,7 +93,7 @@ public class Ventana extends JFrame{
     private void actualizarDatos() {
         //Arreglar el Bug de duplicado en Actualizar
         try{
-            String SQL = "update semillas set nombre_semilla =?,ancho=?,largo=?,crecimiento=? where ID = ?";
+            String SQL = "update semillas set nombre =?,ancho=?,largo=?,crecimiento=? where ID = ?";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(SQL);
 
             int filaSeleccionada = tablaSemillas.getSelectedRow();
@@ -130,7 +127,7 @@ public class Ventana extends JFrame{
 
     private void subirDatosaLaBD() {
         try{
-            String SQL = "insert into semillas (nombre_semilla,ancho,largo,crecimiento) values (?,?,?,?)";
+            String SQL = "insert into semillas (nombre,ancho,largo,crecimiento) values (?,?,?,?)";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(SQL);
             pst.setString(1,txtNombre.getText());
             pst.setString(2,txtAncho.getText());
@@ -157,7 +154,7 @@ public class Ventana extends JFrame{
 
             while (rs.next()){
                 registros[0]= rs.getString("ID");
-                registros[1]= rs.getString("nombre_semilla");
+                registros[1]= rs.getString("nombre");
                 registros[2]= rs.getString("ancho");
                 registros[3]= rs.getString("largo");
                 registros[4]= rs.getString("crecimiento");
@@ -183,7 +180,7 @@ public class Ventana extends JFrame{
 
             while (rs.next()){
                 registros[0]= rs.getString("ID");
-                registros[1]= rs.getString("nombre_semilla");
+                registros[1]= rs.getString("semilla");
                 registros[2]= rs.getString("ancho");
                 registros[3]= rs.getString("largo");
                 registros[4]= rs.getString("crecimiento");
