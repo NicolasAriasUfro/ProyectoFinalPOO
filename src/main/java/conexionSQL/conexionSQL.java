@@ -1,7 +1,7 @@
 package conexionSQL;
 
-import com.mysql.jdbc.Connection;
 import javax.swing.*;
+import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class conexionSQL {
@@ -10,7 +10,7 @@ public class conexionSQL {
 
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            conectar = (Connection) DriverManager.getConnection("jdbc:mysql://bruselas.ceisufro.cl/bd_invernadero", "accesoinvernadero", "#123invernadero");
+            conectar = DriverManager.getConnection("jdbc:mysql://bruselas.ceisufro.cl:3306/bd_invernadero", "accesoinvernadero", "#123invernadero");
 
             JOptionPane.showMessageDialog(null, "Conexion Exitosa");
         }catch (Exception e){
