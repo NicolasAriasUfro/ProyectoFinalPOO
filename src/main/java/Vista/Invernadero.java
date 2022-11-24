@@ -11,25 +11,32 @@ public class Invernadero extends JFrame{
         this.setSize(500,500);
     }
 
+
+
+
+
+
+
+
     private JPanel ventanaInvernadero;
     private JComboBox comboBox1;
-    private JTextField textNombre1;
-    private JTextField textAncho1;
-    private JTextField textLargo1;
-    private JTextField textCrecimiento1;
     private JComboBox comboBox2;
     private JComboBox comboBox3;
     private JComboBox comboBox4;
-    private JTextField textNombre2;
-    private JTextField textAncho2;
-    private JTextField textLargo2;
-    private JTextField textCrecimiento2;
-    private JTextField textNombre3;
-    private JTextField textAncho3;
-    private JTextField textLargo3;
-    private JTextField textCrecimiento3;
-    private JTextField textNombre4;
-    private JTextField textAncho4;
-    private JTextField textLargo4;
-    private JTextField textCrecimiento4;
+    private JLabel textNombre1;
+    private JLabel textNombre2;
+    private JLabel textNombre3;
+    private JLabel textNombre4;
+    private JLabel textAncho1;
+    private JLabel textAncho2;
+    private JLabel textAncho3;
+    private JLabel textAncho4;
+    private JLabel textLargo1;
+    private JLabel textLargo2;
+    private JLabel textLargo3;
+    private JLabel textLargo4;
+    private JLabel textCrecimiento4;
+    private JLabel textCrecimiento1;
+    private JLabel textCrecimiento2;
+    private JLabel textCrecimiento3;
 }

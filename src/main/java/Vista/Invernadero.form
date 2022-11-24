@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="ventanaInvernadero" layout-manager="GridLayoutManager" row-count="6" column-count="4" same-size-horizontally="true" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="723" height="413"/>
+      <xy x="20" y="20" width="644" height="413"/>
     </constraints>
     <properties/>
     <border type="none" title=""/>
@@ -24,40 +24,6 @@
           <model/>
         </properties>
       </component>
-      <component id="67289" class="javax.swing.JTextField" binding="textNombre1">
-        <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="5d654" class="javax.swing.JTextField" binding="textAncho1">
-        <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value=""/>
-        </properties>
-      </component>
-      <component id="adf6f" class="javax.swing.JTextField" binding="textLargo1">
-        <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="f367e" class="javax.swing.JTextField" binding="textCrecimiento1">
-        <constraints>
-          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
       <component id="c76e4" class="javax.swing.JComboBox" binding="comboBox3" default-binding="true">
         <constraints>
           <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false">
@@ -74,110 +40,140 @@
         </constraints>
         <properties/>
       </component>
-      <component id="ae099" class="javax.swing.JTextField" binding="textNombre2">
-        <constraints>
-          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="9ed78" class="javax.swing.JTextField" binding="textAncho2">
-        <constraints>
-          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="48ef8" class="javax.swing.JTextField" binding="textLargo2">
-        <constraints>
-          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="5f8bb" class="javax.swing.JTextField" binding="textCrecimiento2">
-        <constraints>
-          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="142ef" class="javax.swing.JTextField" binding="textNombre3">
-        <constraints>
-          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="133" height="30"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="7150" class="javax.swing.JTextField" binding="textAncho3">
-        <constraints>
-          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="133" height="30"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="1e2dd" class="javax.swing.JTextField" binding="textLargo3">
-        <constraints>
-          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="133" height="30"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="f51ed" class="javax.swing.JTextField" binding="textCrecimiento3">
-        <constraints>
-          <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="133" height="30"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="d2b5a" class="javax.swing.JTextField" binding="textNombre4">
-        <constraints>
-          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="81" height="30"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value=""/>
-        </properties>
-      </component>
-      <component id="fbfd1" class="javax.swing.JTextField" binding="textAncho4">
-        <constraints>
-          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="81" height="30"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="61e71" class="javax.swing.JTextField" binding="textLargo4">
-        <constraints>
-          <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="81" height="30"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="2b695" class="javax.swing.JTextField" binding="textCrecimiento4">
-        <constraints>
-          <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="81" height="30"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
       <component id="8bb7d" class="javax.swing.JComboBox" binding="comboBox2" default-binding="true">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <model/>
+        </properties>
+      </component>
+      <component id="815b8" class="javax.swing.JLabel" binding="textNombre1">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="nombreSemilla"/>
+        </properties>
+      </component>
+      <component id="d7011" class="javax.swing.JLabel" binding="textNombre2">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="nombreSemilla"/>
+        </properties>
+      </component>
+      <component id="7c885" class="javax.swing.JLabel" binding="textNombre3">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="nombreSemilla"/>
+        </properties>
+      </component>
+      <component id="e2187" class="javax.swing.JLabel" binding="textNombre4">
+        <constraints>
+          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="nombreSemilla"/>
+        </properties>
+      </component>
+      <component id="5790b" class="javax.swing.JLabel" binding="textAncho1">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="anchoSemilla"/>
+        </properties>
+      </component>
+      <component id="ef88e" class="javax.swing.JLabel" binding="textAncho2">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="anchoSemilla"/>
+        </properties>
+      </component>
+      <component id="3c63d" class="javax.swing.JLabel" binding="textAncho3">
+        <constraints>
+          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="anchoSemilla"/>
+        </properties>
+      </component>
+      <component id="102ec" class="javax.swing.JLabel" binding="textAncho4">
+        <constraints>
+          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="anchoSemilla"/>
+        </properties>
+      </component>
+      <component id="55500" class="javax.swing.JLabel" binding="textLargo1">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="largoSemilla"/>
+        </properties>
+      </component>
+      <component id="4b480" class="javax.swing.JLabel" binding="textLargo2">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="largoSemilla"/>
+        </properties>
+      </component>
+      <component id="6b7bd" class="javax.swing.JLabel" binding="textLargo3">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="largoSemilla"/>
+        </properties>
+      </component>
+      <component id="a5266" class="javax.swing.JLabel" binding="textLargo4">
+        <constraints>
+          <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="largoSemilla"/>
+        </properties>
+      </component>
+      <component id="c70e5" class="javax.swing.JLabel" binding="textCrecimiento1">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="crecimientoSemilla"/>
+        </properties>
+      </component>
+      <component id="fe0cf" class="javax.swing.JLabel" binding="textCrecimiento2">
+        <constraints>
+          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="crecimientoSemilla"/>
+        </properties>
+      </component>
+      <component id="e7644" class="javax.swing.JLabel" binding="textCrecimiento3">
+        <constraints>
+          <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="crecimientoSemilla"/>
+        </properties>
+      </component>
+      <component id="aab16" class="javax.swing.JLabel" binding="textCrecimiento4">
+        <constraints>
+          <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="crecimientoSemilla"/>
         </properties>
       </component>
     </children>
