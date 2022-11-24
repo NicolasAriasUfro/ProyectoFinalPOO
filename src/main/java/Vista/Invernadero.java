@@ -8,7 +8,7 @@ public class Invernadero extends JFrame{
         frameInit();
         this.setTitle("Plantacion Invernadero");
         this.setContentPane(ventanaInvernadero);
-        this.setSize(500,500);
+        this.setSize(1000,500);
     }
 
 
