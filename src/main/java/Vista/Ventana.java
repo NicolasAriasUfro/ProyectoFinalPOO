@@ -11,7 +11,7 @@ import java.sql.*;
 
 public class Ventana extends JFrame{
     conexionSQL cc = new conexionSQL();
-    Connection con = (Connection) cc.conexion();
+    Connection con = cc.conexion();
     public Ventana(){
         frameInit();
         this.setTitle("Proyecto Invernadero");
