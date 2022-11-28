@@ -173,14 +173,14 @@ public class Ventana extends JFrame{
         String[] registros = new String[5];
 
         DefaultTableModel modelo = new DefaultTableModel(null,titulos);
-        String SQL = "select * from semillas where nombre_semilla like '%" + valor+ "%'";
+        String SQL = "select * from semillas where nombre like '%" + valor+ "%'";
         try {
             Statement st= (Statement) con.createStatement();
             ResultSet rs = st.executeQuery(SQL);
 
             while (rs.next()){
                 registros[0]= rs.getString("ID");
-                registros[1]= rs.getString("semilla");
+                registros[1]= rs.getString("nombre");
                 registros[2]= rs.getString("ancho");
                 registros[3]= rs.getString("largo");
                 registros[4]= rs.getString("crecimiento");
