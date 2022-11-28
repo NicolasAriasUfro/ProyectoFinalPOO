@@ -43,32 +43,25 @@ public class Invernadero extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                //todo obtener un indice del combo box
-                actualizarLista("2");
+
+                String opcion = (CB1.getSelectedItem().toString());
+                String id = opcion.substring(0,opcion.indexOf(")"));
+
+                actualizarLista(id);
             }
         });
     }
 
     public void actualizarLista(String id) {
 
-
-
         String[] data = arregloSemillasSegunId(id);
         data[0] = "ID: "+ data[0];
         data[1] = "nombre: "+ data[1];
-        data[2] = "ancho: "+ data[2];
-        data[3] = "largo: "+ data[3];
-        data[4] = "crecimiento: "+ data[4];
-
-
-
-
-
+        data[2] = "ancho: "+ data[2] + " cm.";
+        data[3] = "largo: "+ data[3] + " cm.";
+        data[4] = "crecimiento: "+ data[4] + " dias.";
 
         list1.setListData(data);
-
-
-
     }
 
     public String mostrarDatos(JComboBox<String> comboBox){
@@ -216,7 +209,6 @@ public class Invernadero extends JFrame{
     private JLabel textCrecimiento3;
     private JButton actualizarButton;
     private JList<String> list1;
-    private JButton btmActualizar1;
     private JComboBox<String> CB1;
     private JButton btmActualizar;
 }
