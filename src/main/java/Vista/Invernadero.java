@@ -4,26 +4,50 @@ import conexionSQL.conexionSQL;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class Invernadero extends JFrame{
-    conexionSQL cc = new conexionSQL();
-    Connection con = cc.conexion();
+    static conexionSQL cc = new conexionSQL();
+    static Connection con = cc.conexion();
 
     DefaultListModel<String> modeloLista;
+
+    ArrayList<JComboBox<String>> arrayCB;
+    ArrayList<JList<String>> arrayJlist;
 
     Invernadero(){
         frameInit();
         this.setTitle("Plantacion Invernadero");
         this.setContentPane(ventanaInvernadero);
         this.setSize(1000,500);
+
+
+
+        //Arrays de elementos
+        arrayCB = new ArrayList<>(10);
+        arrayCB.add(new JComboBox<>());
+
+        arrayCB.add(1,CB1);
+        arrayCB.add(2,CB2);
+        arrayCB.add(3,CB3);
+        arrayCB.add(4,CB4);
+        arrayCB.add(5,CB5);
+
+        arrayJlist = new ArrayList<>(10);
+        arrayJlist.add(new JList<>());
+
+        arrayJlist.add(1,list1);
+        arrayJlist.add(2,list2);
+        arrayJlist.add(3,list3);
+        arrayJlist.add(4,list4);;
+        arrayJlist.add(5,list5);
+
         actualizarComboBox();
 
 
@@ -31,28 +55,49 @@ public class Invernadero extends JFrame{
 
 
 
-        comboBox1.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseExited(MouseEvent e) {
-                super.mouseExited(e);
-                actualizarLabels();
-            }
+
+
+
+
+
+
+        btmActualizar1.addActionListener(e -> {
+            int nroBoton = 1;
+            String opcion = (arrayCB.get(nroBoton).getSelectedItem().toString());
+            String id = opcion.substring(0,opcion.indexOf(")"));
+            actualizarLista(id, nroBoton);
         });
-
-        btmActualizar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-
-                String opcion = (CB1.getSelectedItem().toString());
-                String id = opcion.substring(0,opcion.indexOf(")"));
-
-                actualizarLista(id);
-            }
+        btmActualizar2.addActionListener(e -> {
+            int nroBoton = 2;
+            String opcion = (arrayCB.get(nroBoton).getSelectedItem().toString());
+            String id = opcion.substring(0,opcion.indexOf(")"));
+            actualizarLista(id,nroBoton);
+        });
+        btmActualizar3.addActionListener(e -> {
+            int nroBoton = 3;
+            String opcion = (arrayCB.get(nroBoton).getSelectedItem().toString());
+            String id = opcion.substring(0,opcion.indexOf(")"));
+            actualizarLista(id,nroBoton);
+        });
+        btmActualizar4.addActionListener(e -> {
+            int nroBoton = 4;
+            String opcion = (arrayCB.get(nroBoton).getSelectedItem().toString());
+            String id = opcion.substring(0,opcion.indexOf(")"));
+            actualizarLista(id,nroBoton);
+        });
+        btmActualizar5.addActionListener(e -> {
+            int nroBoton = 5;
+            String opcion = (arrayCB.get(nroBoton).getSelectedItem().toString());
+            String id = opcion.substring(0,opcion.indexOf(")"));
+            actualizarLista(id,nroBoton);
         });
     }
 
-    public void actualizarLista(String id) {
+    public void actualizarLista(String id,int idLista) {
+        /**
+         * @param id es el id de la semilla a la cual se le consultan los datos
+         * @param idLista es el identificador de la lista a la cual se le cambian los datos
+         */
 
         String[] data = arregloSemillasSegunId(id);
         data[0] = "ID: "+ data[0];
@@ -60,11 +105,10 @@ public class Invernadero extends JFrame{
         data[2] = "ancho: "+ data[2] + " cm.";
         data[3] = "largo: "+ data[3] + " cm.";
         data[4] = "crecimiento: "+ data[4] + " dias.";
-
-        list1.setListData(data);
+        arrayJlist.get(idLista).setListData(data);
     }
 
-    public String mostrarDatos(JComboBox<String> comboBox){
+    public static String mostrarDatos(JComboBox<String> comboBox){
         String[] titulos = {"ID","Nombre","Ancho","Largo","Crecimiento"};
         String[] registros = new String[5];
 
@@ -108,10 +152,13 @@ public class Invernadero extends JFrame{
                 registros[4]= rs.getString("crecimiento");
             }
             //setear labels
+            /*
             textNombre1.setText(registros[1]);
             textAncho1.setText(registros[2]);
             textLargo1.setText(registros[3]);
             textCrecimiento1.setText(registros[4]);
+
+             */
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,"Error al cargar los datos: " + e.getMessage());
         }
@@ -165,24 +212,7 @@ public class Invernadero extends JFrame{
 
 
     public void actualizarComboBox(){
-        mostrarDatos(comboBox1);
-        mostrarDatos(comboBox2);
-        mostrarDatos(comboBox3);
-        mostrarDatos(comboBox4);
-
-        mostrarDatos(CB1);
-    }
-
-
-    public void setComboBox1(JComboBox<String> comboBox1) {
-        this.comboBox1 = comboBox1;
-    }
-    public void setTextos(String idSemilla,String nombreGrupo){
-
-
-
-
-
+        arrayCB.stream().forEach(Invernadero::mostrarDatos);
     }
 
 
@@ -192,23 +222,24 @@ public class Invernadero extends JFrame{
     private JComboBox<String> comboBox3;
     private JComboBox<String> comboBox4;
     private JLabel textNombre1;
-    private JLabel textNombre2;
-    private JLabel textNombre3;
-    private JLabel textNombre4;
     private JLabel textAncho1;
-    private JLabel textAncho2;
-    private JLabel textAncho3;
-    private JLabel textAncho4;
     private JLabel textLargo1;
-    private JLabel textLargo2;
-    private JLabel textLargo3;
-    private JLabel textLargo4;
-    private JLabel textCrecimiento4;
     private JLabel textCrecimiento1;
-    private JLabel textCrecimiento2;
-    private JLabel textCrecimiento3;
     private JButton actualizarButton;
     private JList<String> list1;
     private JComboBox<String> CB1;
-    private JButton btmActualizar;
+    private JButton btmActualizar1;
+    private JPanel modulo;
+    private JComboBox<String> CB2;
+    private JComboBox<String> CB3;
+    private JComboBox<String> CB4;
+    private JComboBox<String> CB5;
+    private JButton btmActualizar2;
+    private JButton btmActualizar3;
+    private JButton btmActualizar4;
+    private JButton btmActualizar5;
+    private JList<String> list2;
+    private JList<String> list3;
+    private JList<String> list4;
+    private JList<String> list5;
 }

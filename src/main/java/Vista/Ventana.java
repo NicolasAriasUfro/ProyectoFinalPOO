@@ -12,8 +12,11 @@ import java.sql.*;
 public class Ventana extends JFrame{
     conexionSQL cc = new conexionSQL();
     Connection con = cc.conexion();
+
+
     public Ventana(){
         frameInit();
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("Proyecto Invernadero");
         this.setContentPane(ventanaConexion);
         this.setSize(700,500);
