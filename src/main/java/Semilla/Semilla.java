@@ -18,7 +18,15 @@ public class Semilla {
     }
 
     public String toQuery(){
-        return "";
+
+        //esta cadena se tiene que concatenar con el lugar de la base de datos donde se hace la modificacion
+        String SQLsemilla = "(nombre,ancho,largo,crecimiento) values ("+
+                nombre + ","+
+                ancho + ","+
+                largo + ","+
+                crecimiento + ")";
+
+        return SQLsemilla;
     }
 
 
