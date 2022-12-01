@@ -1,3 +1,5 @@
+package Semilla;
+
 import java.util.Date;
 
 public class Semilla {
@@ -8,10 +10,16 @@ public class Semilla {
     String fechaPlantacion;
     Date fechaCosecha;
 
-    Semilla(String nombre, int ancho, int largo, String crecimiento) {
+    public Semilla(String nombre, int ancho, int largo, String crecimiento) {
         this.nombre = nombre;
         this.ancho = ancho;
         this.largo = largo;
         this.crecimiento = crecimiento;
     }
+
+    public String toQuery(){
+        return "";
+    }
+
+
 }
