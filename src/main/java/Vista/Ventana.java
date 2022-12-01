@@ -3,6 +3,7 @@ package Vista;
 import Vista.Invernadero;
 
 import conexionSQL.conexionSQL;
+import Semilla;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -94,7 +95,6 @@ public class Ventana extends JFrame{
     }
 
     private void actualizarDatos() {
-        //Arreglar el Bug de duplicado en Actualizar
         try{
             String SQL = "update semillas set nombre =?,ancho=?,largo=?,crecimiento=? where ID = ?";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(SQL);
@@ -130,6 +130,8 @@ public class Ventana extends JFrame{
 
     private void subirDatosaLaBD() {
         try{
+
+
             String SQL = "insert into semillas (nombre,ancho,largo,crecimiento) values (?,?,?,?)";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(SQL);
             pst.setString(1,txtNombre.getText());
@@ -138,6 +140,16 @@ public class Ventana extends JFrame{
             pst.setString(4,txtCrecimiento.getText());
 
             pst.execute();
+
+            Semilla e = new Semilla(
+                    txtNombre.getText(),
+                    txtAncho.getText(),
+                    txtLargo.getText(),
+                    txtCrecimiento.getText());
+
+
+
+
 
             JOptionPane.showMessageDialog(null,"Registro Exitoso");
 
