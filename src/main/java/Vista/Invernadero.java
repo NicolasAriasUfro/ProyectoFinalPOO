@@ -166,6 +166,14 @@ public class Invernadero extends JFrame{
     public void ingresoFechaPlantacion(){
         Date fechaIngresada;
         fechaIngresada= Date.valueOf(txtFechaPlantacion.getText());
+        try {
+            String SQL = "alter into plantacion (fecha_plantacion) values (?)";
+            PreparedStatement pst = con.prepareStatement(SQL);
+            pst.setString();
+
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null,"Error de registro: "+ e.getMessage());
+        }
 
 
 
