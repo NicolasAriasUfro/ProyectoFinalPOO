@@ -3,12 +3,12 @@ package Vista;
 import Vista.Invernadero;
 
 import conexionSQL.conexionSQL;
-import Semilla;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
 import java.sql.*;
+import conexionSQL.conexionSQL;
+import Semilla.Semilla;
 
 public class Ventana extends JFrame{
     conexionSQL cc = new conexionSQL();
@@ -130,10 +130,8 @@ public class Ventana extends JFrame{
 
     private void subirDatosaLaBD() {
         try{
-
-
             String SQL = "insert into semillas (nombre,ancho,largo,crecimiento) values (?,?,?,?)";
-            PreparedStatement pst = (PreparedStatement) con.prepareStatement(SQL);
+            PreparedStatement pst = con.prepareStatement(SQL);
             pst.setString(1,txtNombre.getText());
             pst.setString(2,txtAncho.getText());
             pst.setString(3,txtLargo.getText());
@@ -143,13 +141,9 @@ public class Ventana extends JFrame{
 
             Semilla e = new Semilla(
                     txtNombre.getText(),
-                    txtAncho.getText(),
-                    txtLargo.getText(),
+                    Integer.parseInt(txtAncho.getText()),
+                    Integer.parseInt(txtLargo.getText()),
                     txtCrecimiento.getText());
-
-
-
-
 
             JOptionPane.showMessageDialog(null,"Registro Exitoso");
 
