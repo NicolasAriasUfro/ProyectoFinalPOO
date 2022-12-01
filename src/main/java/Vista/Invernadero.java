@@ -4,13 +4,10 @@ import conexionSQL.conexionSQL;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
 
 public class Invernadero extends JFrame{
     static conexionSQL cc = new conexionSQL();
@@ -150,6 +147,7 @@ public class Invernadero extends JFrame{
                 registros[2]= rs.getString("ancho");
                 registros[3]= rs.getString("largo");
                 registros[4]= rs.getString("crecimiento");
+
             }
             //setear labels
             /*
@@ -163,6 +161,16 @@ public class Invernadero extends JFrame{
             JOptionPane.showMessageDialog(null,"Error al cargar los datos: " + e.getMessage());
         }
         return registros;
+    }
+    //Metodo para poder recibir la fecha de plantacion dentro del invernadero
+    public void ingresoFechaPlantacion(){
+        Date fechaIngresada;
+        fechaIngresada= Date.valueOf(txtFechaPlantacion.getText());
+
+
+
+
+
     }
 
     void actualizarLabels(){
@@ -242,4 +250,6 @@ public class Invernadero extends JFrame{
     private JList<String> list3;
     private JList<String> list4;
     private JList<String> list5;
+    private JTextField txtFechaPlantacion;
+    private JLabel labelFechaPlantacion;
 }
