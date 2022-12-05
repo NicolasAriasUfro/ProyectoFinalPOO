@@ -1,13 +1,13 @@
 package Vista;
 
+import javax.swing.table.DefaultTableModel;
+
 public interface Conectable {
-    void eliminarDatos();
+    void eliminarDatos(int id);
 
-    void actualizarDatos();
+    void actualizarDatos(String id, String nombre, String ancho, String largo, String crecimiento);
 
-    void limpiarCajas();
+    void subirDatosaLaBD(String nombre, String ancho, String largo, String crecimiento);
 
-    void subirDatosaLaBD();
-
-    void filtrarDatos(String valor);
+    DefaultTableModel filtrarDatos(String valor);
 }
