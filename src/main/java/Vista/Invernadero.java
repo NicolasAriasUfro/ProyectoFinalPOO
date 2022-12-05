@@ -2,13 +2,10 @@ package Vista;
 
 import conexionSQL.conexionSQL;
 
-import javax.sql.rowset.JdbcRowSet;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.time.format.DateTimeFormatter;
 
 public class Invernadero extends JFrame{
     static conexionSQL cc = new conexionSQL();
@@ -18,6 +15,8 @@ public class Invernadero extends JFrame{
 
     ArrayList<JComboBox<String>> arrayCB;
     static ArrayList<JList<String>> arrayJlist;
+
+    ArrayList<JTextField> arrayIngresoFecha;
 
     Invernadero(){
         frameInit();
@@ -43,8 +42,20 @@ public class Invernadero extends JFrame{
         arrayJlist.add(1,list1);
         arrayJlist.add(2,list2);
         arrayJlist.add(3,list3);
-        arrayJlist.add(4,list4);;
+        arrayJlist.add(4,list4);
         arrayJlist.add(5,list5);
+
+        arrayIngresoFecha = new ArrayList<>();
+        arrayIngresoFecha.add(new JTextField());
+        arrayIngresoFecha.add(1,txtFecha2);
+        arrayIngresoFecha.add(2,txtFecha2);
+        arrayIngresoFecha.add(3,txtFecha2);
+        arrayIngresoFecha.add(4,txtFecha2);
+        arrayIngresoFecha.add(5,txtFecha2);
+
+
+
+
 
         actualizarComboBox();
         actualizarJlist();
@@ -56,9 +67,8 @@ public class Invernadero extends JFrame{
             int nroBoton = 1;
             String opcion = (arrayCB.get(nroBoton).getSelectedItem().toString());
             String id = opcion.substring(0,opcion.indexOf(")"));
+            ingresoFechaPlantacion(nroBoton);
             actualizarLista(id, nroBoton);
-
-            ingresoFechaPlantacion(opcion, String.valueOf(nroBoton));
 
 
         });
@@ -66,24 +76,28 @@ public class Invernadero extends JFrame{
             int nroBoton = 2;
             String opcion = (arrayCB.get(nroBoton).getSelectedItem().toString());
             String id = opcion.substring(0,opcion.indexOf(")"));
+            ingresoFechaPlantacion(nroBoton);
             actualizarLista(id,nroBoton);
         });
         btmActualizar3.addActionListener(e -> {
             int nroBoton = 3;
             String opcion = (arrayCB.get(nroBoton).getSelectedItem().toString());
             String id = opcion.substring(0,opcion.indexOf(")"));
+            ingresoFechaPlantacion(nroBoton);
             actualizarLista(id,nroBoton);
         });
         btmActualizar4.addActionListener(e -> {
             int nroBoton = 4;
             String opcion = (arrayCB.get(nroBoton).getSelectedItem().toString());
             String id = opcion.substring(0,opcion.indexOf(")"));
+            ingresoFechaPlantacion(nroBoton);
             actualizarLista(id,nroBoton);
         });
         btmActualizar5.addActionListener(e -> {
             int nroBoton = 5;
             String opcion = (arrayCB.get(nroBoton).getSelectedItem().toString());
             String id = opcion.substring(0,opcion.indexOf(")"));
+            ingresoFechaPlantacion(nroBoton);
             actualizarLista(id,nroBoton);
         });
     }
@@ -94,7 +108,17 @@ public class Invernadero extends JFrame{
          * @param idLista es el identificador de la lista a la cual se le cambian los datos
          */
         String idSemilla = id;
+        try {
+            String SqlForUpdateSemilla = "UPDATE plantacion set semilla_plantada = (?) where id_plantacion = "+idLista;
+            PreparedStatement pst= con.prepareStatement(SqlForUpdateSemilla);
+            pst.setString(1,idSemilla);
+            pst.execute();
 
+
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"No se pudo actaulizar la semilla plantada: " + e.getMessage());
+        }
 
         try {
             String SqlForID = "select semilla_plantada from plantacion where id_plantacion = " + idLista;
@@ -127,7 +151,7 @@ public class Invernadero extends JFrame{
             ResultSet rs = st.executeQuery(SQL);
 
             while (rs.next()) {
-                data[5] =  "Fecha Plantacion = "+rs.getString("fecha_plantacion");
+                data[5] =  "Fecha Plantacion: "+rs.getString("fecha_plantacion");
             }
 
         } catch (SQLException e) {
@@ -135,11 +159,11 @@ public class Invernadero extends JFrame{
         }
         arrayJlist.get(idLista).setListData(data);
     }
-    public static void actualizarLista( int idLista) {
+    public static void actualizarLista(int idLista) {
         /**
          * @param idLista es el identificador de la lista a la cual se le cambian los datos
          */
-        String idSemilla = String.valueOf(0);
+        String idSemilla = "0";
 
 
         try {
@@ -155,9 +179,6 @@ public class Invernadero extends JFrame{
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,"Error al buscar id_semilla: " + e.getMessage());
         }
-
-
-
 
         String[] data = arregloSemillasSegunId(idSemilla);
         data[0] = "ID: "+ data[0];
@@ -179,10 +200,13 @@ public class Invernadero extends JFrame{
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,"Error al cargar los datos: " + e.getMessage());
         }
+        finally {
+            arrayJlist.get(idLista).setListData(data);
+
+        }
 
 
 
-        arrayJlist.get(idLista).setListData(data);
     }
 
     public static String mostrarDatos(JComboBox<String> comboBox){
@@ -239,28 +263,22 @@ public class Invernadero extends JFrame{
     }
     //Metodo para poder recibir la fecha de plantacion dentro del invernadero
 
-    public void ingresoFechaPlantacion(String idSemilla, String id_plantacion){
-        String fechaTexto = txtFechaPlantacion.getText();
+    public void ingresoFechaPlantacion(int id_plantacion){
+        String fechaTexto = arrayIngresoFecha.get(id_plantacion).getText();
         //Date fechaIngresada;
         //fechaIngresada= Date.valueOf(txtFechaPlantacion.getText());
         try {
             //String SQL = "insert into plantacion (fecha_plantacion) values (?) where id_plantacion = " + id_plantacion;
             String SQL = "UPDATE plantacion SET fecha_plantacion = (?) where id_plantacion =" +id_plantacion;
-            System.out.println("SQL = " + SQL);
 
 
             PreparedStatement pst = con.prepareStatement(SQL);
-            pst.setString(1, txtFechaPlantacion.getText());
+            pst.setString(1, arrayIngresoFecha.get(id_plantacion).getText());
             pst.execute();
 
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null,"Error de registro: "+ e.getMessage());
         }
-
-
-
-
-
     }
 
 
@@ -317,4 +335,9 @@ public class Invernadero extends JFrame{
     private JList<String> list5;
     private JTextField txtFechaPlantacion;
     private JLabel labelFechaPlantacion;
+    private JTextField txtFecha2;
+    private JTextField txtFecha3;
+    private JTextField txtFecha4;
+    private JTextField txtFecha5;
+    private JTextField txtFecha1;
 }
