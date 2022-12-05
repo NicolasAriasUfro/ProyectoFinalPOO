@@ -264,11 +264,8 @@ public class Invernadero extends JFrame{
     //Metodo para poder recibir la fecha de plantacion dentro del invernadero
 
     public void ingresoFechaPlantacion(int id_plantacion){
-        String fechaTexto = arrayIngresoFecha.get(id_plantacion).getText();
-        //Date fechaIngresada;
-        //fechaIngresada= Date.valueOf(txtFechaPlantacion.getText());
         try {
-            //String SQL = "insert into plantacion (fecha_plantacion) values (?) where id_plantacion = " + id_plantacion;
+
             String SQL = "UPDATE plantacion SET fecha_plantacion = (?) where id_plantacion =" +id_plantacion;
 
 

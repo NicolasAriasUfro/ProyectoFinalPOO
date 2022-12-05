@@ -9,8 +9,8 @@ public class conexionSQL {
     public Connection conexion(){
 
         try{
-            conectar = DriverManager.getConnection("jdbc:mysql://localhost/bd_invernadero:3306/bd_invernadero", "root", "");
-            //conectar = DriverManager.getConnection("jdbc:mysql://bruselas.ceisufro.cl:3306/bd_invernadero", "accesoinvernadero", "#123invernadero");
+            //conectar = DriverManager.getConnection("jdbc:mysql://localhost/bd_invernadero:3306/bd_invernadero", "root", "");
+            conectar = DriverManager.getConnection("jdbc:mysql://bruselas.ceisufro.cl:3306/bd_invernadero", "accesoinvernadero", "#123invernadero");
 
             JOptionPane.showMessageDialog(null, "Conexion Exitosa");
         }catch (Exception e){

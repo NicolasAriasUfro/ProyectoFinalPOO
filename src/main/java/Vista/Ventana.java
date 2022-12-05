@@ -7,12 +7,16 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
 import java.sql.*;
+import java.util.ArrayList;
+
 import conexionSQL.conexionSQL;
 import Semilla.Semilla;
 
 public class Ventana extends JFrame implements Conectable {
     conexionSQL cc = new conexionSQL();
     Connection con = cc.conexion();
+
+    ArrayList<Semilla> semillas;
 
 
     public Ventana(){
@@ -73,9 +77,17 @@ public class Ventana extends JFrame implements Conectable {
             }
         });
         btmAbrirInvernadero.addActionListener(new ActionListener() {
+
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Invernadero().setVisible(true);
+                Invernadero v = null;
+                if(v != null){
+                    v.dispose();
+                }
+
+                v = new Invernadero();
+                v.setVisible(true);
             }
         });
     }
@@ -148,6 +160,11 @@ public class Ventana extends JFrame implements Conectable {
                     Integer.parseInt(txtAncho.getText()),
                     Integer.parseInt(txtLargo.getText()),
                     txtCrecimiento.getText());
+
+            semillas.add(e);
+            e =null;
+
+
 
             JOptionPane.showMessageDialog(null,"Registro Exitoso");
 

@@ -6,7 +6,7 @@ public class Plantacion {
     int id;
     int ancho;
     int largo;
-    int semilla_plantada;
+    Semilla semilla;
     Date fecha_plantacion;
 
 
