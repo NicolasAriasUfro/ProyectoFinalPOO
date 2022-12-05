@@ -10,7 +10,7 @@ import java.sql.*;
 import conexionSQL.conexionSQL;
 import Semilla.Semilla;
 
-public class Ventana extends JFrame{
+public class Ventana extends JFrame implements Conectable {
     conexionSQL cc = new conexionSQL();
     Connection con = cc.conexion();
 
@@ -80,7 +80,8 @@ public class Ventana extends JFrame{
         });
     }
 
-    private void eliminarDatos() {
+    @Override
+    public void eliminarDatos() {
         int filaSeleccionada = tablaSemillas.getSelectedRow();
         try{
             String SQL = "delete from semillas where id=" + tablaSemillas.getValueAt(filaSeleccionada,0);
@@ -94,7 +95,8 @@ public class Ventana extends JFrame{
 
     }
 
-    private void actualizarDatos() {
+    @Override
+    public void actualizarDatos() {
         try{
             String SQL = "update semillas set nombre =?,ancho=?,largo=?,crecimiento=? where ID = ?";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(SQL);
@@ -121,14 +123,16 @@ public class Ventana extends JFrame{
         }
     }
 
-    private void limpiarCajas() {
+    @Override
+    public void limpiarCajas() {
         txtNombre.setText(null);
         txtAncho.setText(null);
         txtLargo.setText(null);
         txtCrecimiento.setText(null);
     }
 
-    private void subirDatosaLaBD() {
+    @Override
+    public void subirDatosaLaBD() {
         try{
             String SQL = "insert into semillas (nombre,ancho,largo,crecimiento) values (?,?,?,?)";
             PreparedStatement pst = con.prepareStatement(SQL);
@@ -177,6 +181,7 @@ public class Ventana extends JFrame{
             JOptionPane.showMessageDialog(null,"Error al cargar los datos: " + e.getMessage());
         }
     }
+    @Override
     public void filtrarDatos(String valor){
         String[] titulos = {"ID","Nombre","Ancho","Largo","Crecimiento"};
         String[] registros = new String[5];
