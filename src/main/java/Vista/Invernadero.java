@@ -2,6 +2,7 @@ package Vista;
 
 import conexionSQL.conexionSQL;
 
+import javax.sql.rowset.JdbcRowSet;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
@@ -16,7 +17,7 @@ public class Invernadero extends JFrame{
     DefaultListModel<String> modeloLista;
 
     ArrayList<JComboBox<String>> arrayCB;
-    ArrayList<JList<String>> arrayJlist;
+    static ArrayList<JList<String>> arrayJlist;
 
     Invernadero(){
         frameInit();
@@ -46,14 +47,7 @@ public class Invernadero extends JFrame{
         arrayJlist.add(5,list5);
 
         actualizarComboBox();
-
-
-
-
-
-
-
-
+        actualizarJlist();
 
 
 
@@ -63,6 +57,10 @@ public class Invernadero extends JFrame{
             String opcion = (arrayCB.get(nroBoton).getSelectedItem().toString());
             String id = opcion.substring(0,opcion.indexOf(")"));
             actualizarLista(id, nroBoton);
+
+            ingresoFechaPlantacion(opcion, String.valueOf(nroBoton));
+
+
         });
         btmActualizar2.addActionListener(e -> {
             int nroBoton = 2;
@@ -90,24 +88,106 @@ public class Invernadero extends JFrame{
         });
     }
 
-    public void actualizarLista(String id,int idLista) {
+    public static void actualizarLista(String id, int idLista) {
         /**
          * @param id es el id de la semilla a la cual se le consultan los datos
          * @param idLista es el identificador de la lista a la cual se le cambian los datos
          */
+        String idSemilla = id;
 
-        String[] data = arregloSemillasSegunId(id);
+
+        try {
+            String SqlForID = "select semilla_plantada from plantacion where id_plantacion = " + idLista;
+            Statement st= con.createStatement();
+            ResultSet rs = st.executeQuery(SqlForID);
+            while (rs.next()){
+                idSemilla = rs.getString("semilla_plantada");
+
+            }
+
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Error al buscar id_semilla: " + e.getMessage());
+        }
+
+
+
+
+        String[] data = arregloSemillasSegunId(idSemilla);
         data[0] = "ID: "+ data[0];
         data[1] = "nombre: "+ data[1];
         data[2] = "ancho: "+ data[2] + " cm.";
         data[3] = "largo: "+ data[3] + " cm.";
         data[4] = "crecimiento: "+ data[4] + " dias.";
+
+        String SQL = "select fecha_plantacion from plantacion where id_plantacion =" + idLista;
+
+        try {
+            Statement st= con.createStatement();
+            ResultSet rs = st.executeQuery(SQL);
+
+            while (rs.next()) {
+                data[5] =  "Fecha Plantacion = "+rs.getString("fecha_plantacion");
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Error al cargar los datos: " + e.getMessage());
+        }
+        arrayJlist.get(idLista).setListData(data);
+    }
+    public static void actualizarLista( int idLista) {
+        /**
+         * @param idLista es el identificador de la lista a la cual se le cambian los datos
+         */
+        String idSemilla = String.valueOf(0);
+
+
+        try {
+            String SqlForID = "select semilla_plantada from plantacion where id_plantacion = " + idLista;
+            Statement st= con.createStatement();
+            ResultSet rs = st.executeQuery(SqlForID);
+            while (rs.next()){
+                idSemilla = rs.getString("semilla_plantada");
+
+            }
+
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Error al buscar id_semilla: " + e.getMessage());
+        }
+
+
+
+
+        String[] data = arregloSemillasSegunId(idSemilla);
+        data[0] = "ID: "+ data[0];
+        data[1] = "nombre: "+ data[1];
+        data[2] = "ancho: "+ data[2] + " cm.";
+        data[3] = "largo: "+ data[3] + " cm.";
+        data[4] = "crecimiento: "+ data[4] + " dias.";
+
+        String SQL = "select fecha_plantacion from plantacion where id_plantacion =" + idLista;
+
+        try {
+            Statement st= con.createStatement();
+            ResultSet rs = st.executeQuery(SQL);
+
+            while (rs.next()) {
+                data[5] =  "Fecha Plantacion = "+rs.getString("fecha_plantacion");
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"Error al cargar los datos: " + e.getMessage());
+        }
+
+
+
         arrayJlist.get(idLista).setListData(data);
     }
 
     public static String mostrarDatos(JComboBox<String> comboBox){
-        String[] titulos = {"ID","Nombre","Ancho","Largo","Crecimiento"};
-        String[] registros = new String[5];
+        String[] titulos = {"ID","Nombre","Ancho","Largo","Crecimiento","Fecha plantación"};
+        String[] registros = new String[6];
 
         DefaultTableModel modelo = new DefaultTableModel(null,titulos);
         String SQL = "select * from semillas";
@@ -122,6 +202,9 @@ public class Invernadero extends JFrame{
                 registros[3]= rs.getString("largo");
                 registros[4]= rs.getString("crecimiento");
 
+                //registros[5] = rs.getString("")...
+
+
                 comboBox.addItem(registros[0] + ") "+  registros[1]);
 
 
@@ -133,9 +216,9 @@ public class Invernadero extends JFrame{
 
         return registros[0];
     }
-    public String[] arregloSemillasSegunId(String id){
+    public static String[] arregloSemillasSegunId(String id){
         //query para setear las labels
-        String[] registros = new String[5];
+        String[] registros = new String[6];
         String SQL = "select * from semillas where id=" + id +" "; //TODO conseguir el indice de la semilla selecionada
         try {
             Statement st= (Statement) con.createStatement();
@@ -149,27 +232,26 @@ public class Invernadero extends JFrame{
                 registros[4]= rs.getString("crecimiento");
 
             }
-            //setear labels
-            /*
-            textNombre1.setText(registros[1]);
-            textAncho1.setText(registros[2]);
-            textLargo1.setText(registros[3]);
-            textCrecimiento1.setText(registros[4]);
-
-             */
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,"Error al cargar los datos: " + e.getMessage());
         }
         return registros;
     }
     //Metodo para poder recibir la fecha de plantacion dentro del invernadero
-    public void ingresoFechaPlantacion(){
-        Date fechaIngresada;
-        fechaIngresada= Date.valueOf(txtFechaPlantacion.getText());
+
+    public void ingresoFechaPlantacion(String idSemilla, String id_plantacion){
+        String fechaTexto = txtFechaPlantacion.getText();
+        //Date fechaIngresada;
+        //fechaIngresada= Date.valueOf(txtFechaPlantacion.getText());
         try {
-            String SQL = "alter into plantacion (fecha_plantacion) values (?)";
+            //String SQL = "insert into plantacion (fecha_plantacion) values (?) where id_plantacion = " + id_plantacion;
+            String SQL = "UPDATE plantacion SET fecha_plantacion = (?) where id_plantacion =" +id_plantacion;
+            System.out.println("SQL = " + SQL);
+
+
             PreparedStatement pst = con.prepareStatement(SQL);
-            pst.setString();
+            pst.setString(1, txtFechaPlantacion.getText());
+            pst.execute();
 
         }catch (SQLException e){
             JOptionPane.showMessageDialog(null,"Error de registro: "+ e.getMessage());
@@ -181,48 +263,6 @@ public class Invernadero extends JFrame{
 
     }
 
-    void actualizarLabels(){
-        System.out.println(comboBox1.getSelectedItem().toString());
-
-
-
-        //query para setear las labels
-        String[] registros = new String[5];
-        String SQL = "select * from semillas where id=4"; //TODO conseguir el indice de la semilla selecionada
-        try {
-            Statement st= (Statement) con.createStatement();
-            ResultSet rs = st.executeQuery(SQL);
-
-            while (rs.next()){
-                registros[0]= rs.getString("ID");
-                registros[1]= rs.getString("nombre");
-                registros[2]= rs.getString("ancho");
-                registros[3]= rs.getString("largo");
-                registros[4]= rs.getString("crecimiento");
-            }
-            //setear labels
-            textNombre1.setText(registros[1]);
-            textAncho1.setText(registros[2]);
-            textLargo1.setText(registros[3]);
-            textCrecimiento1.setText(registros[4]);
-
-
-
-
-
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,"Error al cargar los datos: " + e.getMessage());
-        }
-
-
-
-
-    }
-
-
-
-
 
 
 
@@ -230,6 +270,23 @@ public class Invernadero extends JFrame{
     public void actualizarComboBox(){
         arrayCB.stream().forEach(Invernadero::mostrarDatos);
     }
+    public void actualizarJlist(){
+        actualizarLista(1);
+        actualizarLista(2);
+        actualizarLista(3);
+        actualizarLista(4);
+        actualizarLista(5);
+
+
+
+
+        //arrayJlist.stream().forEach(Invernadero::intermediaParaActualizarLista);
+    }
+
+
+
+
+
 
 
     private JPanel ventanaInvernadero;
