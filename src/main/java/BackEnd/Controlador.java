@@ -1,6 +1,5 @@
 package BackEnd;
 
-import Vista.Conectable;
 import conexionSQL.conexionSQL;
 
 import javax.swing.*;
