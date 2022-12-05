@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:mysql://bruselas.ceisufro.cl:3306/bd_invernadero</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="bd_invernadero@localhost" uuid="99bd040e-83ab-4c6f-ba38-f947de6fb8d7">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/bd_invernadero</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
