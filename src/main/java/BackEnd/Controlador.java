@@ -1,10 +1,13 @@
 package BackEnd;
 
+import Semilla.Semilla;
+import Semilla.Plantacion;
 import conexionSQL.conexionSQL;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Controlador implements Conectable{ //todo implementar de conectable
     conexionSQL cc = new conexionSQL();
@@ -86,5 +89,32 @@ public class Controlador implements Conectable{ //todo implementar de conectable
             JOptionPane.showMessageDialog(null,"Error al cargar los datos: " + e.getMessage());
         }
         return modelo;
+    }
+
+    public ArrayList<Semilla> obtenerSemillasBD() throws SQLException {
+
+        String SQL = "Select (id, nombre, ancho, largo, crecimiento) from semillas";
+        Statement st = con.createStatement();
+        ResultSet rs = st.executeQuery(SQL);
+
+        ArrayList<Semilla> semillas = new ArrayList<>();
+        while (rs.next()){
+            Semilla s = new Semilla(rs.getInt("id"), rs.getString("nombre"),rs.getInt("ancho"),rs.getInt("largo"),rs.getString("crecimiento"));
+            semillas.add(s);
+        }
+        return semillas;
+    }
+    public ArrayList<Plantacion> obtenerPlantacionesBD() throws SQLException {
+
+        String SQL = "Select (id_plantacion, ancho, largo, crecimiento) from plantacion";
+        Statement st = con.createStatement();
+        ResultSet rs = st.executeQuery(SQL);
+
+        ArrayList<Plantacion> plantaciones = new ArrayList<>();
+        while (rs.next()){
+            Plantacion p = new Plantacion(rs.getInt("id_plantacion"), rs.getInt("ancho"),rs.getInt("largo"));
+            plantaciones.add(p);
+        }
+        return plantaciones;
     }
 }
