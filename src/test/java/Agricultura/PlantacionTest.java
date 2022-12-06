@@ -22,7 +22,6 @@ class PlantacionTest {
     void toQuery() {
         String expected = "(id_plantacion,ancho,largo,) values (217,100,100)";
         String recibed = plantacion.toQuery();
-        System.out.println(recibed);
         assertEquals(expected,recibed);
 
     }

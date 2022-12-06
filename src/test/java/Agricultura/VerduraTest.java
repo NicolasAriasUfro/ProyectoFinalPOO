@@ -17,10 +17,6 @@ class VerduraTest {
     void toSQlTest(){
         String expected = "(nombre,ancho,largo,crecimiento) values (Tomate,40,40,200)";
         String recibed = verdura.toQuery();
-<<<<<<< HEAD
-=======
-        System.out.println(recibed);
->>>>>>> NubeGitHub/master
         assertEquals(expected,recibed);
         }
 
