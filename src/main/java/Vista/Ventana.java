@@ -13,6 +13,7 @@ import Agricultura.Verdura;
 public class Ventana extends JFrame {
 
     ArrayList<Verdura> verduras;
+    Invernadero invernadero = null;
 
     Controlador controlador = new Controlador();
 
@@ -75,13 +76,13 @@ public class Ventana extends JFrame {
             }
         });
         btmAbrirInvernadero.addActionListener(e -> {
-            Invernadero v = null;
-            if(v != null){
-                v.dispose();
+
+            if(invernadero != null){
+                invernadero.dispose();
             }
 
-            v = new Invernadero();
-            v.setVisible(true);
+            invernadero = new Invernadero();
+            invernadero.setVisible(true);
         });
     }
 
