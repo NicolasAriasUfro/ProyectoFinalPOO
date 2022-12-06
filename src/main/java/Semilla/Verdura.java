@@ -2,15 +2,8 @@ package Semilla;
 
 import java.util.Date;
 
-public class Verdura {
+public class Verdura extends Planta{
 
-    int id;
-    String nombre;
-    int ancho;
-    int largo;
-    String crecimiento;
-    String fechaPlantacion;
-    Date fechaCosecha;
 
     public Verdura(String nombre, int ancho, int largo, String crecimiento) {
         this.nombre = nombre;
