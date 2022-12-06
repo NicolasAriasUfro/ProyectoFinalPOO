@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import Agricultura.Verdura;
 
 public class Ventana extends JFrame {
-    public conexionSQL cc = new conexionSQL();
-    public Connection con = cc.conexion();
 
     ArrayList<Verdura> verduras;
 
