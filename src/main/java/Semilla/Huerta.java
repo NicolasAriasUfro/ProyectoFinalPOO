@@ -2,7 +2,7 @@ package Semilla;
 
 import java.util.ArrayList;
 
-public class Siembra {
+public class Huerta {
     ArrayList<Semilla> semillas;
     ArrayList<Plantacion> plantaciones;
 
