@@ -18,4 +18,14 @@ public class Plantacion {
         this.ancho = ancho;
         this.largo = largo;
     }
+    public String toQuery(){
+
+        //esta cadena se tiene que concatenar con el lugar de la base de datos donde se hace la modificacion
+        String SQLplantacion = "(id_plantacion,ancho,largo,) values ("+
+                this.id_plantacion + ","+
+                this.ancho + ","+
+                this.largo + ")";
+
+        return SQLplantacion;
+    }
 }
