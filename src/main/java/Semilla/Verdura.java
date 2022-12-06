@@ -2,7 +2,7 @@ package Semilla;
 
 import java.util.Date;
 
-public class Semilla {
+public class Verdura {
 
     int id;
     String nombre;
@@ -12,13 +12,13 @@ public class Semilla {
     String fechaPlantacion;
     Date fechaCosecha;
 
-    public Semilla(String nombre, int ancho, int largo, String crecimiento) {
+    public Verdura(String nombre, int ancho, int largo, String crecimiento) {
         this.nombre = nombre;
         this.ancho = ancho;
         this.largo = largo;
         this.crecimiento = crecimiento;
     }
-    public Semilla(int id,String nombre, int ancho, int largo, String crecimiento) {
+    public Verdura(int id, String nombre, int ancho, int largo, String crecimiento) {
         this.id = id;
         this.nombre = nombre;
         this.ancho = ancho;

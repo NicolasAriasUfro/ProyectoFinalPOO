@@ -1,6 +1,6 @@
 package BackEnd;
 
-import Semilla.Semilla;
+import Semilla.Verdura;
 import Semilla.Plantacion;
 import conexionSQL.conexionSQL;
 
@@ -91,18 +91,18 @@ public class Controlador implements Conectable{ //todo implementar de conectable
         return modelo;
     }
 
-    public ArrayList<Semilla> obtenerSemillasBD() throws SQLException {
+    public ArrayList<Verdura> obtenerSemillasBD() throws SQLException {
 
         String SQL = "Select (id, nombre, ancho, largo, crecimiento) from semillas";
         Statement st = con.createStatement();
         ResultSet rs = st.executeQuery(SQL);
 
-        ArrayList<Semilla> semillas = new ArrayList<>();
+        ArrayList<Verdura> verduras = new ArrayList<>();
         while (rs.next()){
-            Semilla s = new Semilla(rs.getInt("id"), rs.getString("nombre"),rs.getInt("ancho"),rs.getInt("largo"),rs.getString("crecimiento"));
-            semillas.add(s);
+            Verdura s = new Verdura(rs.getInt("id"), rs.getString("nombre"),rs.getInt("ancho"),rs.getInt("largo"),rs.getString("crecimiento"));
+            verduras.add(s);
         }
-        return semillas;
+        return verduras;
     }
     public ArrayList<Plantacion> obtenerPlantacionesBD() throws SQLException {
 

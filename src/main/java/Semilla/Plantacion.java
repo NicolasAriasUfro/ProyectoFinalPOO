@@ -9,7 +9,7 @@ public class Plantacion {
     int id_plantacion;
     int ancho;
     int largo;
-    Semilla semilla;
+    Verdura verdura;
     Date fecha_plantacion;
 
 

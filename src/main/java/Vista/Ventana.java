@@ -4,18 +4,17 @@ import BackEnd.Controlador;
 
 import conexionSQL.conexionSQL;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
 import java.sql.*;
 import java.util.ArrayList;
 
-import Semilla.Semilla;
+import Semilla.Verdura;
 
 public class Ventana extends JFrame {
     public conexionSQL cc = new conexionSQL();
     public Connection con = cc.conexion();
 
-    ArrayList<Semilla> semillas;
+    ArrayList<Verdura> verduras;
 
     Controlador controlador = new Controlador();
 
