@@ -1,7 +1,7 @@
 package BackEnd;
 
-import Semilla.Verdura;
-import Semilla.Plantacion;
+import Agricultura.Verdura;
+import Agricultura.Plantacion;
 import conexionSQL.conexionSQL;
 
 import javax.swing.*;
@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class Controlador implements Conectable{ //todo implementar de conectable
+public class Controlador implements Conectable{
     conexionSQL cc = new conexionSQL();
     Connection con = cc.conexion();
     @Override

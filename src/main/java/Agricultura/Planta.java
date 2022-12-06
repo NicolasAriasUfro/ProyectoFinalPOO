@@ -1,4 +1,4 @@
-package Semilla;
+package Agricultura;
 
 public class Planta {
     int id;

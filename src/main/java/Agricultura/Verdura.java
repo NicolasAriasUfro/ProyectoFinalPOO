@@ -1,6 +1,4 @@
-package Semilla;
-
-import java.util.Date;
+package Agricultura;
 
 public class Verdura extends Planta{
 

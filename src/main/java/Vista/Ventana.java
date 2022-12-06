@@ -8,7 +8,7 @@ import java.awt.event.*;
 import java.sql.*;
 import java.util.ArrayList;
 
-import Semilla.Verdura;
+import Agricultura.Verdura;
 
 public class Ventana extends JFrame {
     public conexionSQL cc = new conexionSQL();
