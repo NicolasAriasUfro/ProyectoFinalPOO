@@ -1,4 +1,4 @@
-package BackEnd;
+package Controllers;
 
 import Agricultura.Verdura;
 import Agricultura.Plantacion;
@@ -9,11 +9,11 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class Controlador implements Conectable{
+public class SeedController implements Conectable{
     conexionSQL cc = new conexionSQL();
     Connection con = cc.conexion();
     @Override
-    public void eliminarDatos(int id) {
+    public void eliminarSemilla(int id) {
         try{
             String SQL = "delete from semillas where id=" +id;
 

@@ -1,9 +1,9 @@
-package BackEnd;
+package Controllers;
 
 import javax.swing.table.DefaultTableModel;
 
 public interface Conectable {
-    void eliminarDatos(int id);
+    void eliminarSemilla(int id);
 
     void actualizarDatos(String id, String nombre, String ancho, String largo, String crecimiento);
 

@@ -1,15 +1,18 @@
 package Vista;
 
+import Controllers.PlantacionController;
 import conexionSQL.conexionSQL;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class Invernadero extends JFrame{
     static conexionSQL cc = new conexionSQL();
     static Connection con = cc.conexion();
+
 
     DefaultListModel<String> modeloLista;
 
@@ -17,6 +20,7 @@ public class Invernadero extends JFrame{
     static ArrayList<JList<String>> arrayJlist;
 
     ArrayList<JTextField> arrayIngresoFecha;
+    PlantacionController plantacionController = new PlantacionController();
 
     Invernadero(){
         frameInit();
@@ -25,7 +29,7 @@ public class Invernadero extends JFrame{
         this.setSize(1308,500);
 
 
-
+        PlantacionController plantacionController = new PlantacionController();
         //Arrays de elementos
         arrayCB = new ArrayList<>(10);
         arrayCB.add(new JComboBox<>());
@@ -53,53 +57,35 @@ public class Invernadero extends JFrame{
         arrayIngresoFecha.add(4,txtFecha2);
         arrayIngresoFecha.add(5,txtFecha2);
 
-
-
-
-
         actualizarComboBox();
-        actualizarJlist();
-
-
-
+        updateAllJList();
 
         btmActualizar1.addActionListener(e -> {
             int nroBoton = 1;
-            String opcion = (arrayCB.get(nroBoton).getSelectedItem().toString());
-            String id = opcion.substring(0,opcion.indexOf(")"));
-            ingresoFechaPlantacion(nroBoton);
-            actualizarLista(id, nroBoton);
-
-
+            updatePlantUIByNumberButton(nroBoton);
         });
         btmActualizar2.addActionListener(e -> {
             int nroBoton = 2;
-            String opcion = (arrayCB.get(nroBoton).getSelectedItem().toString());
-            String id = opcion.substring(0,opcion.indexOf(")"));
-            ingresoFechaPlantacion(nroBoton);
-            actualizarLista(id,nroBoton);
+            updatePlantUIByNumberButton(nroBoton);
         });
         btmActualizar3.addActionListener(e -> {
             int nroBoton = 3;
-            String opcion = (arrayCB.get(nroBoton).getSelectedItem().toString());
-            String id = opcion.substring(0,opcion.indexOf(")"));
-            ingresoFechaPlantacion(nroBoton);
-            actualizarLista(id,nroBoton);
+            updatePlantUIByNumberButton(nroBoton);
         });
         btmActualizar4.addActionListener(e -> {
             int nroBoton = 4;
-            String opcion = (arrayCB.get(nroBoton).getSelectedItem().toString());
-            String id = opcion.substring(0,opcion.indexOf(")"));
-            ingresoFechaPlantacion(nroBoton);
-            actualizarLista(id,nroBoton);
+            updatePlantUIByNumberButton(nroBoton);
         });
         btmActualizar5.addActionListener(e -> {
             int nroBoton = 5;
-            String opcion = (arrayCB.get(nroBoton).getSelectedItem().toString());
-            String id = opcion.substring(0,opcion.indexOf(")"));
-            ingresoFechaPlantacion(nroBoton);
-            actualizarLista(id,nroBoton);
+            updatePlantUIByNumberButton(nroBoton);
         });
+    }
+    private void updatePlantUIByNumberButton(int buttonNumber){
+        String opcion = (arrayCB.get(buttonNumber).getSelectedItem().toString());
+        String id = opcion.substring(0,opcion.indexOf(")"));
+        ingresoFechaPlantacion(buttonNumber);
+        actualizarLista(id,buttonNumber);
     }
 
     public static void actualizarLista(String id, int idLista) {
@@ -126,16 +112,10 @@ public class Invernadero extends JFrame{
             ResultSet rs = st.executeQuery(SqlForID);
             while (rs.next()){
                 idSemilla = rs.getString("semilla_plantada");
-
             }
-
-
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,"Error al buscar id_semilla: " + e.getMessage());
+            Logger.getAnonymousLogger().severe("error al buscar id_semilla: "+ e.getMessage());
         }
-
-
-
 
         String[] data = arregloSemillasSegunId(idSemilla);
         data[0] = "ID: "+ data[0];
@@ -155,7 +135,7 @@ public class Invernadero extends JFrame{
             }
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,"Error al cargar los datos: " + e.getMessage());
+            Logger.getAnonymousLogger().severe("Error al cargar los datos: " + e.getMessage());
         }
         arrayJlist.get(idLista).setListData(data);
     }
@@ -177,7 +157,7 @@ public class Invernadero extends JFrame{
 
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,"Error al buscar id_semilla: " + e.getMessage());
+            Logger.getAnonymousLogger().severe("Error al buscar id_semilla: " + e.getMessage());
         }
 
         String[] data = arregloSemillasSegunId(idSemilla);
@@ -198,7 +178,7 @@ public class Invernadero extends JFrame{
             }
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,"Error al cargar los datos: " + e.getMessage());
+            Logger.getAnonymousLogger().severe("Error al cargar los datos: " + e.getMessage());
         }
         finally {
             arrayJlist.get(idLista).setListData(data);
@@ -209,7 +189,7 @@ public class Invernadero extends JFrame{
 
     }
 
-    public static String mostrarDatos(JComboBox<String> comboBox){
+    public static void mostrarDatos(JComboBox<String> comboBox){
         String[] titulos = {"ID","Nombre","Ancho","Largo","Crecimiento","Fecha plantación"};
         String[] registros = new String[6];
 
@@ -238,7 +218,6 @@ public class Invernadero extends JFrame{
             JOptionPane.showMessageDialog(null,"Error al cargar los datos: " + e.getMessage());
         }
 
-        return registros[0];
     }
     public static String[] arregloSemillasSegunId(String id){
         //query para setear las labels
@@ -264,45 +243,20 @@ public class Invernadero extends JFrame{
     //Metodo para poder recibir la fecha de plantacion dentro del invernadero
 
     public void ingresoFechaPlantacion(int id_plantacion){
-        try {
+        this.plantacionController.updatePlatationDate(id_plantacion, arrayIngresoFecha.get(id_plantacion).getText());
 
-            String SQL = "UPDATE plantacion SET fecha_plantacion = (?) where id_plantacion =" +id_plantacion;
-
-
-            PreparedStatement pst = con.prepareStatement(SQL);
-            pst.setString(1, arrayIngresoFecha.get(id_plantacion).getText());
-            pst.execute();
-
-        }catch (SQLException e){
-            JOptionPane.showMessageDialog(null,"Error de registro: "+ e.getMessage());
-        }
     }
-
-
-
-
 
     public void actualizarComboBox(){
         arrayCB.stream().forEach(Invernadero::mostrarDatos);
     }
-    public void actualizarJlist(){
+    public void updateAllJList(){
         actualizarLista(1);
         actualizarLista(2);
         actualizarLista(3);
         actualizarLista(4);
         actualizarLista(5);
-
-
-
-
-        //arrayJlist.stream().forEach(Invernadero::intermediaParaActualizarLista);
     }
-
-
-
-
-
-
 
     private JPanel ventanaInvernadero;
     private JComboBox<String> comboBox1;

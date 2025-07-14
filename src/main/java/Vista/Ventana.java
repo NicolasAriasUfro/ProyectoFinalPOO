@@ -1,11 +1,9 @@
 package Vista;
 
-import BackEnd.Controlador;
+import Controllers.SeedController;
 
-import conexionSQL.conexionSQL;
 import javax.swing.*;
 import java.awt.event.*;
-import java.sql.*;
 import java.util.ArrayList;
 
 import Agricultura.Verdura;
@@ -15,7 +13,7 @@ public class Ventana extends JFrame {
     ArrayList<Verdura> verduras;
     Invernadero invernadero = null;
 
-    Controlador controlador = new Controlador();
+    SeedController seedController = new SeedController();
 
 
     public Ventana(){
@@ -25,14 +23,14 @@ public class Ventana extends JFrame {
         this.setContentPane(ventanaConexion);
         this.setSize(700,500);
 
-        tablaSemillas.setModel(controlador.filtrarDatos(txtBusqueda.getText()));
+        tablaSemillas.setModel(seedController.filtrarDatos(txtBusqueda.getText()));
 
 
         btmGuardar.addActionListener(e -> {
 
-            controlador.subirDatosaLaBD(txtNombre.getText(),txtAncho.getText(), txtLargo.getText(), txtCrecimiento.getText());
+            seedController.subirDatosaLaBD(txtNombre.getText(),txtAncho.getText(), txtLargo.getText(), txtCrecimiento.getText());
             limpiarCajas();
-            tablaSemillas.setModel(controlador.filtrarDatos(txtBusqueda.getText()));
+            tablaSemillas.setModel(seedController.filtrarDatos(txtBusqueda.getText()));
 
         });
         tablaSemillas.addMouseListener(new MouseAdapter() {
@@ -51,27 +49,24 @@ public class Ventana extends JFrame {
             int filaSeleccionada = tablaSemillas.getSelectedRow();
             String dao = (String) tablaSemillas.getValueAt(filaSeleccionada,0);
 
-            controlador.actualizarDatos(dao, txtNombre.getText(),txtAncho.getText(), txtLargo.getText(),txtCrecimiento.getText());
+            seedController.actualizarDatos(dao, txtNombre.getText(),txtAncho.getText(), txtLargo.getText(),txtCrecimiento.getText());
             limpiarCajas();
-            tablaSemillas.setModel(controlador.filtrarDatos(txtBusqueda.getText()));
+            tablaSemillas.setModel(seedController.filtrarDatos(txtBusqueda.getText()));
         });
-        btmEliminar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        btmEliminar.addActionListener(e -> {
 
-                int filaSeleccionada = tablaSemillas.getSelectedRow();
-                int id = (int) tablaSemillas.getValueAt(filaSeleccionada,0);
+            int filaSeleccionada = tablaSemillas.getSelectedRow();
+            int id = (int) tablaSemillas.getValueAt(filaSeleccionada,0);
 
-                controlador.eliminarDatos(id);
-                limpiarCajas();
-                tablaSemillas.setModel(controlador.filtrarDatos(txtBusqueda.getText()));
-            }
+            seedController.eliminarSemilla(id);
+            limpiarCajas();
+            tablaSemillas.setModel(seedController.filtrarDatos(txtBusqueda.getText()));
         });
         txtBusqueda.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 super.keyReleased(e);
-                tablaSemillas.setModel(controlador.filtrarDatos(txtBusqueda.getText()));
+                tablaSemillas.setModel(seedController.filtrarDatos(txtBusqueda.getText()));
 
             }
         });
