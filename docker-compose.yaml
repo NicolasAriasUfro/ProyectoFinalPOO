@@ -1,0 +1,10 @@
+services:
+  mysql:
+    image: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: bd_invernadero
+      MYSQL_USER: invernadero
+      MYSQL_ROOT_PASSWORD: example
